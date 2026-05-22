@@ -36,7 +36,9 @@ jobs:
           sudo ln -s /opt/allure/bin/allure /usr/bin/allure
 
       - name: Generate Allure Report
-        run: allure generate allure-results --clean -o allure-report --single-file
+        run: |
+          find . -type d -name "allure-results"
+          allure generate $(find . -type d -name "allure-results" | head -1) --clean -o allure-report --single-file
         continue-on-error: true
 
       - name: Send report by email
