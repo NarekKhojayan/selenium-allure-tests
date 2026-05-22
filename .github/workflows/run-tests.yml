@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.GMAIL_USER }}
           password: ${{ secrets.GMAIL_PASSWORD }}
           subject: "Allure Test Report — ${{ github.run_number }}"
-          to: narekkhojayan60@gmail.com
-          from: narekkhojayan435@gmail.com
+          to: narekkhojayan435@gmail.com
+          from: narekkhojayan60@gmail.com
           body: "Тесты завершены! Allure отчёт во вложении."
           attachments: allure-report/index.html
