@@ -1,4 +1,7 @@
 .vs/
 bin/
 obj/
+allure-report/
+allure-results/
+allure-single/
 *.user
