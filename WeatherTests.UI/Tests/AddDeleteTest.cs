@@ -15,6 +15,8 @@ namespace WeatherTests.UI.Tests
         {
             AddDeletePage page = new AddDeletePage(driver);
             page.OpenAddRemove();
+            Assert.That(driver.Title, Does.Contain("The Internet"));
+
         }
     }
 

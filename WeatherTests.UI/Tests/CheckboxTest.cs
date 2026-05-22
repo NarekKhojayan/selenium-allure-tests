@@ -14,6 +14,8 @@ namespace WeatherTests.UI.Tests
         {
             var page = new CheckboxePage(driver);
             page.CheckboxFunctional();
+            Assert.That(driver.Title, Does.Contain("The Internet"));
+
         }
     }
 }

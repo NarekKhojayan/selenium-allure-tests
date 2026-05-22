@@ -16,6 +16,8 @@ namespace WebTests.UI.Tests
         {
             var page = new InputPage(driver);
             page.NumberInputFunctional();
+            Assert.That(driver.Title, Does.Contain("The Internet"));
+
         }
         [Test]
         [AllureFeature("General Input test")]
@@ -23,6 +25,8 @@ namespace WebTests.UI.Tests
         {
             var page = new InputPage(driver);
             page.GeneralInputFunctional();
+            Assert.That(driver.Title, Does.Contain("The Internet"));
+
         }
     }
 }
