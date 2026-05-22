@@ -19,13 +19,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore WebTests.UI.csproj
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build WebTests.UI.csproj --no-restore
+        run: dotnet build --no-restore
 
       - name: Run tests
-        run: dotnet test WebTests.UI.csproj --no-build --logger "trx"
+        run: dotnet test --no-build --logger "trx"
         continue-on-error: true
 
       - name: Install Allure
