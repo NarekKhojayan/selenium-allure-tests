@@ -51,5 +51,5 @@ jobs:
           subject: "Allure Test Report — ${{ github.run_number }}"
           to: narekkhojayan435@gmail.com
           from: narekkhojayan60@gmail.com
-          body: "Тесты завершены! Allure отчёт во вложении."
+          body: "Tests completed! Allure report in attachment."
           attachments: allure-report/index.html
