@@ -1,0 +1,53 @@
+name: Run Selenium Tests
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore WebTests.UI.csproj
+
+      - name: Build
+        run: dotnet build WebTests.UI.csproj --no-restore
+
+      - name: Run tests
+        run: dotnet test WebTests.UI.csproj --no-build --logger "trx"
+        continue-on-error: true
+
+      - name: Install Allure
+        run: |
+          wget -O allure.tgz https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
+          tar -zxvf allure.tgz
+          sudo mv allure-2.27.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+
+      - name: Generate Allure Report
+        run: allure generate allure-results --clean -o allure-report --single-file
+        continue-on-error: true
+
+      - name: Send report by email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_PASSWORD }}
+          subject: "Allure Test Report — ${{ github.run_number }}"
+          to: narekkhojayan60@gmail.com
+          from: narekkhojayan435@gmail.com
+          body: "Тесты завершены! Allure отчёт во вложении."
+          attachments: allure-report/index.html
